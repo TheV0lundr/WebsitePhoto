@@ -14,7 +14,7 @@
             transition: background-image 0.5s ease, filter 0.5s ease;
             background-size: cover;
             background-position: center;
-            filter: blur(10px);
+            filter: none;
         }
         header {
             text-align: center;
@@ -226,7 +226,7 @@
                 images.scrollTo({ left: index * images.clientWidth, behavior: 'smooth' });
                 const currentImage = images.children[index];
                 const backgroundImage = currentImage.getAttribute('data-bg');
-                document.body.style.backgroundImage = `url(${backgroundImage})`;
+                document.querySelector('#galerie').style.backgroundImage = `url(${backgroundImage})`;
                 document.querySelector('.container').style.filter = 'blur(10px)';
                 carousel.querySelector('::before').style.backgroundImage = `url(${backgroundImage})`;
             }
