@@ -47,6 +47,28 @@
             transition: filter 0.5s ease;
             filter: blur(10px);
         }
+        #galerie {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        #galerie::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            filter: blur(20px);
+            z-index: -1;
+            transition: background-image 0.5s ease;
+        }
         .carousel {
             position: relative;
             max-width: 500px;
@@ -195,6 +217,12 @@
             let autoSlideInterval;
 
             function updateCarousel() {
+                images.scrollTo({ left: index * images.clientWidth, behavior: 'smooth' });
+                const currentImage = images.children[index];
+                const backgroundImage = currentImage.getAttribute('data-bg');
+                document.querySelector('#galerie').style.backgroundImage = `url(${backgroundImage})`;
+                document.querySelector('#galerie').style.filter = 'blur(20px)';
+            
                 images.scrollTo({ left: index * images.clientWidth, behavior: 'smooth' });
                 const currentImage = images.children[index];
                 const backgroundImage = currentImage.getAttribute('data-bg');
