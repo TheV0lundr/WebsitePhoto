@@ -49,13 +49,20 @@
         }
         .carousel-images {
             display: flex;
-            transition: transform 0.5s ease-in-out;
+            flex-wrap: nowrap;
+            scroll-snap-type: x mandatory;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .carousel-images::-webkit-scrollbar {
+            display: none;
         }
         .carousel img {
-            width: 50%; /* Réduction de la taille des images */
+            width: 100%;
             height: auto;
-            height: auto;
-            border-radius: 10px;
+            flex: 0 0 100%;
+            scroll-snap-align: center;
         }
         .carousel-buttons {
             position: absolute;
@@ -117,13 +124,13 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            let index = 0;
             const images = document.querySelector('.carousel-images');
             const totalImages = images.children.length;
-            let autoSlideInterval = setInterval(autoSlide, 2000);
+            let index = 0;
+            let autoSlideInterval;
 
             function updateCarousel() {
-                images.style.transform = `translateX(${-index * 100}%)`;
+                images.scrollTo({ left: index * images.clientWidth, behavior: 'smooth' });
             }
 
             function autoSlide() {
