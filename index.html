@@ -11,6 +11,10 @@
             padding: 0;
             background-color: #f5f5f5;
             color: #333;
+            transition: background-image 0.5s ease, filter 0.5s ease;
+            background-size: cover;
+            background-position: center;
+            filter: blur(10px);
         }
         header {
             text-align: center;
@@ -40,6 +44,8 @@
             margin: auto;
             padding: 50px 0;
             text-align: center;
+            transition: filter 0.5s ease;
+            filter: blur(10px);
         }
         .carousel {
             position: relative;
@@ -192,7 +198,8 @@
                 images.scrollTo({ left: index * images.clientWidth, behavior: 'smooth' });
                 const currentImage = images.children[index];
                 const backgroundImage = currentImage.getAttribute('data-bg');
-                carousel.style.setProperty('--current-bg', `url(${backgroundImage})`);
+                document.body.style.backgroundImage = `url(${backgroundImage})`;
+                document.querySelector('.container').style.filter = 'blur(10px)';
                 carousel.querySelector('::before').style.backgroundImage = `url(${backgroundImage})`;
             }
 
