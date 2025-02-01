@@ -178,30 +178,39 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            const images = document.querySelectorAll('.carousel-images img');
+            const images = document.querySelector('.carousel-images');
+            const totalImages = images.children.length;
             let index = 0;
-            const totalImages = images.length;
+            let autoSlideInterval;
 
             function updateCarousel() {
-                imagesContainer.style.transform = `translateX(-${index * 100}%)`;
+                images.scrollTo({ left: index * images.clientWidth, behavior: 'smooth' });
             }
-            
+
             function autoSlide() {
                 index = (index + 1) % totalImages;
                 updateCarousel();
             }
 
-            setInterval(autoSlide, 2000);
+            function startAutoSlide() {
+                autoSlideInterval = setInterval(autoSlide, 2000);
+            }
 
             document.getElementById('next').addEventListener('click', () => {
+                clearInterval(autoSlideInterval);
                 index = (index + 1) % totalImages;
                 updateCarousel();
+                startAutoSlide();
             });
 
             document.getElementById('prev').addEventListener('click', () => {
+                clearInterval(autoSlideInterval);
                 index = (index - 1 + totalImages) % totalImages;
                 updateCarousel();
+                startAutoSlide();
             });
+            
+            startAutoSlide();
         });
     </script>
 </body>
