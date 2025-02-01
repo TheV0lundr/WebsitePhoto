@@ -211,6 +211,8 @@
                 updateCarousel();
             }
 
+            setInterval(autoSlide, 2000);
+
             document.getElementById('next').addEventListener('click', () => {
                 index = (index + 1) % totalImages;
                 updateCarousel();
