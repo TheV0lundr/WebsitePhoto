@@ -62,12 +62,15 @@
 
         .carousel-images {
             display: flex;
-            transition: transform 0.5s ease;
+            transition: opacity 1s ease-in-out;
+            position: relative;
         }
 
         .carousel img {
+            position: absolute;
             width: 500px;
-            flex-shrink: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
         }
 
         .carousel-buttons {
@@ -91,7 +94,7 @@
         }
 
         .carousel-buttons button:hover {
-            background-color: #f39c12;
+            background-color: #1d4e8e;
         }
 
         .about, .contact {
@@ -136,15 +139,16 @@
 </head>
 <body>
     <header>
-        TF.SHOTZ - Photographe
+        TF.SHOTZ
     </header>
 
     <nav>
         <a href="#galerie">Galerie</a>
         <a href="#a-propos">À propos</a>
         <a href="#contact">Contact</a>
-        <a href="tarifs_car_photography.html">Tarifs Car Photography</a>
-        <a href="tarifs_mariage.html">Tarifs Mariage</a>
+        <a href="tarifs_car_photography.html">Price Car</a>
+        <a href="tarifs_mariage.html">Price Mariage</a>
+        <a href="tarif_shooting_classic.html">Price Portrait</a>
     </nav>
 
     <div id="galerie" class="section">
@@ -173,7 +177,6 @@
                 <img src="Images/DSC021.JPG" alt="Photo 21">
                 <img src="Images/DSC022.JPG" alt="Photo 22">
                 <img src="Images/DSC023.JPG" alt="Photo 23">
-                
             </div>
             <div class="carousel-buttons">
                 <button id="prev">❮</button>
@@ -184,12 +187,7 @@
 
     <div id="a-propos" class="section about">
         <h2>À propos</h2>
-        <p>Bienvenue sur TF.SHOTZ. Spécialisé en portraits, photographie automobile et paysages, je capture la grandeur du monde à travers mon objectif.</p>
-    </div>
-
-    <div id="contact" class="section contact">
-        <h2>Contact</h2>
-        <p>Pour un shooting ou une collaboration, contactez-moi : <a href="mailto:contact@tfshotz.com" style="color: #f39c12; text-decoration: underline;">contact@tfshotz.com</a></p>
+        <p>Bienvenue sur TF.SHOTZ. Spécialisé en portraits, photographie automobile et Mariage.</p>
     </div>
 
     <footer>
@@ -198,12 +196,15 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            const images = document.querySelector('.carousel-images');
-            const totalImages = images.children.length;
+            const images = document.querySelectorAll('.carousel-images');
             let index = 0;
+            const totalImages = images.length;
 
             function updateCarousel() {
-                images.style.transform = `translateX(-${index * 100}%)`;
+                images.forEach((img, i) => {
+                    img.classList.remove('active');
+                });
+                images[index].classList.add('active');
             }
             
             function autoSlide() {
