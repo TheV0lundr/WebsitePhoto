@@ -216,6 +216,10 @@
                 updateCarousel();
             });
         });
+        setInterval(() => {
+        index = (index + 1) % totalImages;
+        updateCarousel();
+    }, 2000);
     </script>
 </body>
 </html>
