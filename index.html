@@ -41,15 +41,18 @@
             padding: 50px 0;
             text-align: center;
         }
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        .gallery img {
-            max-width: 100%;
-            height: auto;
+        .carousel {
+            position: relative;
+            max-width: 600px;
+            margin: auto;
+            overflow: hidden;
             border-radius: 10px;
+        }
+        .carousel img {
+            width: 100%;
+            display: none;
+        }
+        .carousel img.active {
             display: block;
         }
         .about {
@@ -82,9 +85,14 @@
     
     <div id="galerie" class="container">
         <h2>Galerie</h2>
-        <div class="gallery">
-            <img src="Images/DSC02497.JPG" alt="">
-            <img src="Images/DSC07228.JPG" alt="">
+        <div class="carousel">
+            <img src="Images/DSC01.JPG" alt="Photo 1" class="active">
+            <img src="Images/DSC02.JPG" alt="Photo 2">
+            <img src="Images/DSC03.JPG" alt="Photo 3">
+            <img src="Images/DSC04.JPG" alt="Photo 4">
+            <img src="Images/DSC05.JPG" alt="Photo 5">
+            <img src="Images/DSC06.JPG" alt="Photo 6">
+            <img src="Images/DSC07.JPG" alt="Photo 7">
         </div>
     </div>
     
@@ -97,5 +105,18 @@
         <h2>Contact</h2>
         <p>Pour un shooting ou une collaboration, contactez-moi : <a href="mailto:contact@tfshotz.com">contact@tfshotz.com</a></p>
     </div>
+
+    <script>
+        let index = 0;
+        const images = document.querySelectorAll('.carousel img');
+        
+        function showNextImage() {
+            images[index].classList.remove('active');
+            index = (index + 1) % images.length;
+            images[index].classList.add('active');
+        }
+        
+        setInterval(showNextImage, 3000);
+    </script>
 </body>
 </html>
