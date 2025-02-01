@@ -16,7 +16,7 @@
             text-align: center;
             background: url('Images/DSC00744.JPG') no-repeat center center/cover;
             color: white;
-            padding: 120px 30px;
+            padding: 180px 30px; /* Augmenté la hauteur du header */
             font-size: 3em;
             font-weight: bold;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
@@ -53,7 +53,7 @@
 
         .carousel {
             position: relative;
-            max-width: 550px;
+            max-width: 450px; /* Réduit la taille des images du carousel */
             margin: 50px auto;
             overflow: hidden;
             border-radius: 12px;
@@ -66,7 +66,7 @@
         }
 
         .carousel img {
-            width: 33%;
+            width: 100%;
             flex-shrink: 0;
         }
 
@@ -120,7 +120,7 @@
         @media (max-width: 768px) {
             header {
                 font-size: 2em;
-                padding: 80px 10px;
+                padding: 120px 10px; /* Augmenté proportionnellement pour mobile */
             }
 
             nav a {
