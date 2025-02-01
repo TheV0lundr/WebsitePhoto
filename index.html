@@ -52,7 +52,8 @@
             transition: transform 0.5s ease-in-out;
         }
         .carousel img {
-            width: 100%;
+            width: 50%; /* Réduction de la taille des images */
+            height: auto;
             height: auto;
             border-radius: 10px;
         }
@@ -119,7 +120,7 @@
             let index = 0;
             const images = document.querySelector('.carousel-images');
             const totalImages = images.children.length;
-            let autoSlideInterval;
+            let autoSlideInterval = setInterval(autoSlide, 2000);
 
             function updateCarousel() {
                 images.style.transform = `translateX(${-index * 100}%)`;
