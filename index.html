@@ -49,11 +49,10 @@
         }
         .carousel-images {
             display: flex;
-            width: calc(100% * 7); /* Ajuste la largeur pour inclure toutes les images */
             transition: transform 0.5s ease-in-out;
         }
         .carousel img {
-            width: 100vw; /* Chaque image prend 100% de la largeur de l'écran */
+            width: 100%;
             height: auto;
             border-radius: 10px;
         }
@@ -120,13 +119,19 @@
             let index = 0;
             const images = document.querySelector('.carousel-images');
             const totalImages = images.children.length;
-            let autoSlideInterval = setInterval(autoSlide, 2000);
+            let autoSlideInterval;
 
             function updateCarousel() {
                 images.style.transform = `translateX(${-index * 100}%)`;
             }
 
-            , 2000);
+            function autoSlide() {
+                index = (index + 1) % totalImages;
+                updateCarousel();
+            }
+
+            function startAutoSlide() {
+                autoSlideInterval = setInterval(autoSlide, 2000);
             }
 
             document.getElementById('next').addEventListener('click', () => {
