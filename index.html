@@ -11,8 +11,6 @@
             padding: 0;
             background-color: #3c3a3a;
             color: #333;
-            position: relative;
-            overflow: hidden;
         }
         header {
             text-align: center;
@@ -42,8 +40,9 @@
             margin: auto;
             padding: 50px 0;
             text-align: center;
+        }
+        .carousel-section {
             position: relative;
-            z-index: 2;
         }
         .carousel {
             position: relative;
@@ -99,8 +98,6 @@
     </style>
 </head>
 <body>
-    <div class="blur-background"></div>
-
     <header>
         TF.SHOTZ - Photographe
     </header>
@@ -110,22 +107,25 @@
         <a href="#a-propos">À propos</a>
         <a href="#contact">Contact</a>
     </nav>
-    
-    <div id="galerie" class="container">
-        <h2>Galerie</h2>
-        <div class="carousel">
-            <div class="carousel-images">
-                <img src="Images/DSC01.JPG" alt="Photo 1">
-                <img src="Images/DSC02.JPG" alt="Photo 2">
-                <img src="Images/DSC03.JPG" alt="Photo 3">
-                <img src="Images/DSC04.JPG" alt="Photo 4">
-                <img src="Images/DSC05.JPG" alt="Photo 5">
-                <img src="Images/DSC06.JPG" alt="Photo 6">
-                <img src="Images/DSC07.JPG" alt="Photo 7">
-            </div>
-            <div class="carousel-buttons">
-                <button id="prev">❮</button>
-                <button id="next">❯</button>
+
+    <div id="galerie" class="carousel-section">
+        <div class="blur-background"></div>
+        <div class="container">
+            <h2>Galerie</h2>
+            <div class="carousel">
+                <div class="carousel-images">
+                    <img src="Images/DSC01.JPG" alt="Photo 1">
+                    <img src="Images/DSC02.JPG" alt="Photo 2">
+                    <img src="Images/DSC03.JPG" alt="Photo 3">
+                    <img src="Images/DSC04.JPG" alt="Photo 4">
+                    <img src="Images/DSC05.JPG" alt="Photo 5">
+                    <img src="Images/DSC06.JPG" alt="Photo 6">
+                    <img src="Images/DSC07.JPG" alt="Photo 7">
+                </div>
+                <div class="carousel-buttons">
+                    <button id="prev">❮</button>
+                    <button id="next">❯</button>
+                </div>
             </div>
         </div>
     </div>
