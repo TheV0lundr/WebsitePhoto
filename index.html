@@ -55,6 +55,7 @@
         .carousel-images {
             display: flex;
             gap: 10px;
+            /* Nous utilisons un défilement linéaire continu */
             animation: scrollImages 30s linear infinite;
         }
 
@@ -62,16 +63,16 @@
             width: 300px;
             height: auto;
             opacity: 0.7;
-            object-fit: cover; /* Pour éviter la déformation des images */
+            object-fit: cover;
         }
 
-        /* Animation de défilement continu des images */
+        /* Animation de défilement fluide des images */
         @keyframes scrollImages {
             0% {
                 transform: translateX(0);
             }
             100% {
-                transform: translateX(-100%); /* Faire défiler toutes les images sur une distance égale à la largeur totale du carrousel */
+                transform: translateX(-100%); /* Le carrousel défile sur toute la largeur des images */
             }
         }
 
