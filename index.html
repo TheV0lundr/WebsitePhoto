@@ -150,48 +150,48 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const carouselContainer = document.getElementById("carousel-container");
-            const imageCount = 23;
-    
-            // Populate the carousel with images
-            for (let i = 1; i <= imageCount; i++) {
-                let img = document.createElement("img");
-                img.src = `Images/DSC${String(i).padStart(3, '0')}.JPG`; // Chemin modifié
-                img.alt = `Photo ${i}`;
-                carouselContainer.appendChild(img);
-            }
-    
-            const images = document.querySelectorAll(".carousel-images img");
-            let currentIndex = 0;
-    
-            function updateCarousel() {
-                images.forEach((img, index) => {
-                    img.classList.remove("active");
-                    if (index === currentIndex) {
-                        img.classList.add("active");
-                    }
-                });
-    
-                // Update container transform
-                const offset = -currentIndex * (200 + 10); // Image width + gap
-                carouselContainer.style.transform = `translateX(${offset}px)`;
-            }
-    
-            document.getElementById("next").addEventListener("click", () => {
-                currentIndex = (currentIndex + 1) % images.length;
-                updateCarousel();
+            document.addEventListener("DOMContentLoaded", function () {
+        const carouselContainer = document.getElementById("carousel-container");
+        const imageCount = 23;
+
+        // Populate the carousel with images
+        for (let i = 1; i <= imageCount; i++) {
+            let img = document.createElement("img");
+            // Utiliser un padding pour que les nombres de fichier aient toujours 3 chiffres (ex: DSC001, DSC023, etc.)
+            img.src = `Images/DSC${String(i).padStart(3, '0')}.JPG`; // Modifie padStart à 3 chiffres
+            img.alt = `Photo ${i}`;
+            carouselContainer.appendChild(img);
+        }
+
+        const images = document.querySelectorAll(".carousel-images img");
+        let currentIndex = 0;
+
+        function updateCarousel() {
+            images.forEach((img, index) => {
+                img.classList.remove("active");
+                if (index === currentIndex) {
+                    img.classList.add("active");
+                }
             });
-    
-            document.getElementById("prev").addEventListener("click", () => {
-                currentIndex = (currentIndex - 1 + images.length) % images.length;
-                updateCarousel();
-            });
-    
-            // Initial setup
+
+            // Update container transform
+            const offset = -currentIndex * (300 + 10); // Image width + gap
+            carouselContainer.style.transform = `translateX(${offset}px)`;
+        }
+
+        document.getElementById("next").addEventListener("click", () => {
+            currentIndex = (currentIndex + 1) % images.length;
             updateCarousel();
         });
+
+        document.getElementById("prev").addEventListener("click", () => {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateCarousel();
+        });
+
+        // Initial setup
+        updateCarousel();
+    });
     </script>
-    
 </body>
 </html>
