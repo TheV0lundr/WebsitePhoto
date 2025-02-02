@@ -16,7 +16,7 @@
             text-align: center;
             background: url('Images/DSC00744.JPG') no-repeat center center/cover;
             color: white;
-            padding: 180px 30px; /* Augmenté la hauteur du header */
+            padding: 250px 30px; /* Augmenté la hauteur du header */
             font-size: 3em;
             font-weight: bold;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
@@ -34,7 +34,7 @@
         }
 
         nav a {
-            color: #f39c12;
+            color: #223e68;
             text-decoration: none;
             margin: 0 20px;
             font-size: 1.2em;
@@ -52,8 +52,8 @@
         }
 
         .carousel {
-            position: absolute;
-            max-width: 500px; /* Augmenté légèrement la taille du carousel */
+            position: relative;
+            max-width: 500px;
             margin: 50px auto;
             overflow: hidden;
             border-radius: 12px;
@@ -93,88 +93,20 @@
         .carousel-buttons button:hover {
             background-color: #1d4e8e;
         }
-
-        .about, .contact {
-            background-color: #1f1f1f;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            margin: 30px auto;
-            max-width: 900px;
-            border-radius: 12px;
-            padding: 40px;
-            text-align: center;
-        }
-
-        footer {
-            background-color: #1f1f1f;
-            color: white;
-            text-align: center;
-            padding: 20px 0;
-            margin-top: 30px;
-        }
-
-        footer p {
-            margin: 0;
-            font-size: 0.9em;
-        }
-
     </style>
 </head>
 <body>
-    <header>
-        TF.SHOTZ
-    </header>
-
-    <nav>
-        <a href="#galerie">Galerie</a>
-        <a href="#a-propos">À propos</a>
-        <a href="#contact">Contact</a>
-        <a href="tarifs_car_photography.html">Price Car</a>
-        <a href="tarifs_mariage.html">Price Mariage</a>
-        <a href="tarif_shooting_classic.html">Price Portrait</a>
-    </nav>
-
-    <div id="galerie" class="section">
-        <h2>Galerie</h2>
-        <div class="carousel">
-            <div class="carousel-images">
-                <img src="Images/DSC01.JPG" alt="Photo 1">
-                <img src="Images/DSC02.JPG" alt="Photo 2">
-                <img src="Images/DSC03.JPG" alt="Photo 3">
-                <img src="Images/DSC04.JPG" alt="Photo 4">
-                <img src="Images/DSC05.JPG" alt="Photo 5">
-                <img src="Images/DSC06.JPG" alt="Photo 6">
-                <img src="Images/DSC08.JPG" alt="Photo 8">
-                <img src="Images/DSC09.JPG" alt="Photo 9">
-                <img src="Images/DSC010.JPG" alt="Photo 10">
-                <img src="Images/DSC011.JPG" alt="Photo 11">
-                <img src="Images/DSC012.JPG" alt="Photo 12">
-                <img src="Images/DSC013.JPG" alt="Photo 13">
-                <img src="Images/DSC014.JPG" alt="Photo 14">
-                <img src="Images/DSC015.JPG" alt="Photo 15">
-                <img src="Images/DSC016.JPG" alt="Photo 16">
-                <img src="Images/DSC017.JPG" alt="Photo 17">
-                <img src="Images/DSC018.JPG" alt="Photo 18">
-                <img src="Images/DSC019.JPG" alt="Photo 19">
-                <img src="Images/DSC020.JPG" alt="Photo 20">
-                <img src="Images/DSC021.JPG" alt="Photo 21">
-                <img src="Images/DSC022.JPG" alt="Photo 22">
-                <img src="Images/DSC023.JPG" alt="Photo 23">
-            </div>
-            <div class="carousel-buttons">
-                <button id="prev">❮</button>
-                <button id="next">❯</button>
-            </div>
+    <div class="carousel">
+        <div class="carousel-images">
+            <img src="Images/DSC01.JPG" alt="Photo 1">
+            <img src="Images/DSC02.JPG" alt="Photo 2">
+            <img src="Images/DSC03.JPG" alt="Photo 3">
+        </div>
+        <div class="carousel-buttons">
+            <button id="prev">❮</button>
+            <button id="next">❯</button>
         </div>
     </div>
-
-    <div id="a-propos" class="section about">
-        <h2>À propos</h2>
-        <p>Bienvenue sur TF.SHOTZ. Spécialisé en portraits, photographie automobile et Mariage.</p>
-    </div>
-
-    <footer>
-        <p>© 2025 TF.SHOTZ - Tous droits réservés</p>
-    </footer>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -184,7 +116,7 @@
             let autoSlideInterval;
 
             function updateCarousel() {
-                images.scrollTo({ left: index * images.clientWidth, behavior: 'smooth' });
+                images.style.transform = `translateX(-${index * 500}px)`;
             }
 
             function autoSlide() {
@@ -193,7 +125,7 @@
             }
 
             function startAutoSlide() {
-                autoSlideInterval = setInterval(autoSlide, 2000);
+                autoSlideInterval = setInterval(autoSlide, 3000);
             }
 
             document.getElementById('next').addEventListener('click', () => {
