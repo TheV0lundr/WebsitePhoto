@@ -176,9 +176,7 @@
       let currentIndex = clonesCount;
 
       // Fonction de mise à jour de la position du carrousel
-      function updateCarousel(animate = true) {
-        // On active ou désactive la transition
-        carouselContainer.style.transition = animate ? "transform 0.5s ease-in-out" : "none";
+      function updateCarousel() {
         const offset = -currentIndex * (imageWidth + gap);
         carouselContainer.style.transform = `translateX(${offset}px)`;
       }
@@ -187,11 +185,11 @@
       function autoScroll() {
         currentIndex++;
         updateCarousel();
-        // Lorsque l'on atteint les clones à la fin, on réinitialise (après la transition) vers le premier réel
+        // Lorsque l'on atteint la fin, on réinitialise
         if (currentIndex === fullImages.length - clonesCount) {
           setTimeout(() => {
             currentIndex = clonesCount;
-            updateCarousel(false); // Mise à jour instantanée sans animation
+            updateCarousel(); // Mise à jour sans animation
           }, 500);
         }
       }
@@ -203,11 +201,11 @@
       document.getElementById("next").addEventListener("click", () => {
         currentIndex++;
         updateCarousel();
-        // Lorsque l'on atteint les clones à la fin, on réinitialise (après la transition) vers le premier réel
+        // Lorsque l'on atteint la fin, on réinitialise vers le premier réel
         if (currentIndex === fullImages.length - clonesCount) {
           setTimeout(() => {
             currentIndex = clonesCount;
-            updateCarousel(false); // Mise à jour instantanée sans animation
+            updateCarousel(); // Mise à jour sans animation
           }, 500);
         }
         // Réinitialiser le défilement automatique lorsque l'utilisateur interagit
@@ -217,4 +215,23 @@
 
       // Événement pour le clic sur le bouton "précédent"
       document.getElementById("prev").addEventListener("click", () => {
-        currentIndex--
+        currentIndex--;
+        updateCarousel();
+        // Si l'on atteint les clones du début, on réinitialise vers la fin réelle
+        if (currentIndex === clonesCount - 1) {
+          setTimeout(() => {
+            currentIndex = fullImages.length - clonesCount - 1;
+            updateCarousel();
+          }, 500);
+        }
+        // Réinitialiser le défilement automatique lorsque l'utilisateur interagit
+        clearInterval(autoScrollInterval);
+        autoScrollInterval = setInterval(autoScroll, 3000);
+      });
+
+      // Position initiale sans animation
+      updateCarousel();
+    });
+  </script>
+</body>
+</html>
