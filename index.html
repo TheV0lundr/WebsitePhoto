@@ -55,7 +55,6 @@
         .carousel-images {
             display: flex;
             gap: 10px;
-            /* Nous utilisons un défilement linéaire continu */
             animation: scrollImages 30s linear infinite;
         }
 
@@ -147,7 +146,7 @@
             const images = document.querySelectorAll(".carousel-images img");
 
             // Cloner les images pour faire une boucle infinie
-            for (let i = 0; i < 4; i++) { // Cloner les 4 premières images
+            for (let i = 0; i < images.length; i++) { // Cloner toutes les images
                 let clone = images[i].cloneNode(true);
                 carouselContainer.appendChild(clone);
             }
