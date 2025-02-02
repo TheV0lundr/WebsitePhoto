@@ -175,18 +175,28 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
+            const carouselContainer = document.getElementById("carousel-container");
+            for (let i = 1; i <= 23; i++) {
+                let img = document.createElement("img");
+                img.src = `Images/photo${i}.jpg`;
+                img.alt = `Photo ${i}`;
+                if (i === 1) img.classList.add("active");
+                carouselContainer.appendChild(img);
+            }
+
             const images = document.querySelectorAll('.carousel-images img');
-            let index = 1;
+            let index = 0;
             let autoSlideInterval;
 
             function updateCarousel() {
-                images.forEach((img, i)) => {
+                images.forEach((img, i) => {
                     img.classList.remove('active');
-                    img.style.width = i === index ? '300px' : '200px';
+                    img.style.width = i === index ? '500px' : '300px';
                     img.style.opacity = i === index ? '1' : '0.7';
-                }};
+                });
                 images[index].classList.add('active');
-
+                images[index].scrollIntoView({ behavior: 'smooth', inline: 'center' });
+            }
             function autoSlide() {
                 index = (index + 1) % images.length;
                 updateCarousel();
