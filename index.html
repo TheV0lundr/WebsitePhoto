@@ -3,20 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TF.SHOTZ</title>
+    <title>TF.SHOTZ - Photographie</title>
     <style>
         body {
             margin: 0;
             font-family: 'Roboto', Arial, sans-serif;
             background-color: #121212;
             color: #ffffff;
+            text-align: center;
         }
 
         header {
-            text-align: center;
-            background: url('Images/DSC00744.JPG') no-repeat center center/cover;
-            color: white;
-            padding: 250px 30px; /* Augmenté la hauteur du header */
+            background: url('Images/header.jpg') no-repeat center center/cover;
+            padding: 150px 30px;
             font-size: 3em;
             font-weight: bold;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
@@ -26,19 +25,17 @@
             display: flex;
             justify-content: center;
             background-color: #1f1f1f;
-            padding: 20px 0;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            padding: 15px 0;
             position: sticky;
             top: 0;
             z-index: 1000;
         }
 
         nav a {
-            color: #223e68;
+            color: #f39c12;
             text-decoration: none;
-            margin: 0 20px;
+            margin: 0 15px;
             font-size: 1.2em;
-            font-weight: bold;
             transition: color 0.3s;
         }
 
@@ -46,14 +43,9 @@
             color: #ffffff;
         }
 
-        .section {
-            padding: 60px 20px;
-            text-align: center;
-        }
-
         .carousel {
             position: relative;
-            max-width: 500px;
+            max-width: 700px;
             margin: 50px auto;
             overflow: hidden;
             border-radius: 12px;
@@ -66,7 +58,7 @@
         }
 
         .carousel-images img {
-            width: 500px;
+            width: 700px;
             flex: 0 0 100%;
         }
 
@@ -87,25 +79,46 @@
             cursor: pointer;
             font-size: 1.5em;
             border-radius: 50%;
-            transition: background-color 0.3s;
         }
 
-        .carousel-buttons button:hover {
-            background-color: #1d4e8e;
+        .contact, .pricing {
+            background-color: #1f1f1f;
+            margin: 50px auto;
+            padding: 40px;
+            max-width: 900px;
+            border-radius: 12px;
         }
     </style>
 </head>
 <body>
-    <div class="carousel">
+    <header>TF.SHOTZ</header>
+    <nav>
+        <a href="#galerie">Galerie</a>
+        <a href="#tarifs">Tarifs</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <div id="galerie" class="carousel">
         <div class="carousel-images">
-            <img src="Images/DSC01.JPG" alt="Photo 1">
-            <img src="Images/DSC02.JPG" alt="Photo 2">
-            <img src="Images/DSC03.JPG" alt="Photo 3">
+            <img src="Images/photo1.jpg" alt="Photo 1">
+            <img src="Images/photo2.jpg" alt="Photo 2">
+            <img src="Images/photo3.jpg" alt="Photo 3">
         </div>
         <div class="carousel-buttons">
             <button id="prev">❮</button>
             <button id="next">❯</button>
         </div>
+    </div>
+
+    <div id="tarifs" class="pricing">
+        <h2>Tarifs</h2>
+        <p><a href="tarifs_portrait.html">Portrait</a> | <a href="tarifs_mariage.html">Mariage</a> | <a href="tarifs_auto.html">Automobile</a></p>
+    </div>
+
+    <div id="contact" class="contact">
+        <h2>Contact</h2>
+        <p>Email : contact@tfshotz.com</p>
+        <p>Instagram : @tf.shotz</p>
     </div>
 
     <script>
@@ -116,7 +129,7 @@
             let autoSlideInterval;
 
             function updateCarousel() {
-                images.style.transform = `translateX(-${index * 500}px)`;
+                images.style.transform = `translateX(-${index * 700}px)`;
             }
 
             function autoSlide() {
