@@ -180,49 +180,65 @@
                 let img = document.createElement("img");
                 img.src = `Images/photo${i}.jpg`;
                 img.alt = `Photo ${i}`;
-                if (i === 1) img.classList.add("active");
                 carouselContainer.appendChild(img);
             }
-
+    
             const images = document.querySelectorAll('.carousel-images img');
             let index = 0;
             let autoSlideInterval;
-
+    
             function updateCarousel() {
                 images.forEach((img, i) => {
                     img.classList.remove('active');
-                    img.style.width = i === index ? '500px' : '300px';
-                    img.style.opacity = i === index ? '1' : '0.7';
+                    const offset = (i - index + images.length) % images.length;
+                    
+                    if (offset === 0) {
+                        // Image centrale (active)
+                        img.classList.add('active');
+                        img.style.transform = 'scale(1.2)';
+                        img.style.opacity = '1';
+                    } else if (offset === 1 || offset === images.length - 1) {
+                        // Images à gauche et à droite
+                        img.style.transform = 'scale(0.9)';
+                        img.style.opacity = '0.7';
+                    } else {
+                        // Images restantes (masquées)
+                        img.style.transform = 'scale(0.7)';
+                        img.style.opacity = '0.5';
+                    }
                 });
-                images[index].classList.add('active');
-                images[index].scrollIntoView({ behavior: 'smooth', inline: 'center' });
+    
+                // Translation pour centrer l'image active
+                const offsetX = -(index * 210) + 300; // Ajuste la position
+                carouselContainer.style.transform = `translateX(${offsetX}px)`;
             }
+    
             function autoSlide() {
                 index = (index + 1) % images.length;
                 updateCarousel();
             }
-
+    
             function startAutoSlide() {
-                autoSlideInterval = setInterval(autoSlide, 2000);
+                autoSlideInterval = setInterval(autoSlide, 3000);
             }
-
+    
             document.getElementById('next').addEventListener('click', () => {
                 clearInterval(autoSlideInterval);
                 index = (index + 1) % images.length;
                 updateCarousel();
                 startAutoSlide();
             });
-
+    
             document.getElementById('prev').addEventListener('click', () => {
                 clearInterval(autoSlideInterval);
                 index = (index - 1 + images.length) % images.length;
                 updateCarousel();
                 startAutoSlide();
             });
-            
+    
             updateCarousel();
             startAutoSlide();
         });
-    </script>
+    </script>    
 </body>
 </html>
