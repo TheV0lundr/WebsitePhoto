@@ -208,9 +208,6 @@
             updateCarousel(); // Mise à jour sans animation
           }, 500);
         }
-        // Réinitialiser le défilement automatique lorsque l'utilisateur interagit
-        clearInterval(autoScrollInterval);
-        autoScrollInterval = setInterval(autoScroll, 3000);
       });
 
       // Événement pour le clic sur le bouton "précédent"
@@ -224,9 +221,6 @@
             updateCarousel();
           }, 500);
         }
-        // Réinitialiser le défilement automatique lorsque l'utilisateur interagit
-        clearInterval(autoScrollInterval);
-        autoScrollInterval = setInterval(autoScroll, 3000);
       });
 
       // Position initiale sans animation
