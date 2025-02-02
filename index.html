@@ -153,54 +153,46 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const carouselContainer = document.getElementById("carousel-container");
-            for (let i = 1; i <= 23; i++) {
+            const imageCount = 23;
+    
+            // Populate the carousel with images
+            for (let i = 1; i <= imageCount; i++) {
                 let img = document.createElement("img");
-                img.src = `Images/photo${i}.jpg`;
+                img.src = `Images/DSC${String(i).padStart(2, '0')}.JPG`; // Chemin modifié
                 img.alt = `Photo ${i}`;
-                if (i === 1) img.classList.add("active");
                 carouselContainer.appendChild(img);
             }
-
-            const images = document.querySelectorAll('.carousel-images img');
-            let index = 0;
-            let autoSlideInterval;
-
+    
+            const images = document.querySelectorAll(".carousel-images img");
+            let currentIndex = 0;
+    
             function updateCarousel() {
-                images.forEach((img, i) => {
-                    img.classList.remove('active');
-                    img.style.width = i === index ? '300px' : '200px';
-                    img.style.opacity = i === index ? '1' : '0.7';
+                images.forEach((img, index) => {
+                    img.classList.remove("active");
+                    if (index === currentIndex) {
+                        img.classList.add("active");
+                    }
                 });
-                images[index].classList.add('active');
-                images[index].scrollIntoView({ behavior: 'smooth', inline: 'center' });
+    
+                // Update container transform
+                const offset = -currentIndex * (200 + 10); // Image width + gap
+                carouselContainer.style.transform = `translateX(${offset}px)`;
             }
-
-            function autoSlide() {
-                index = (index + 1) % images.length;
+    
+            document.getElementById("next").addEventListener("click", () => {
+                currentIndex = (currentIndex + 1) % images.length;
                 updateCarousel();
-            }
-
-            function startAutoSlide() {
-                autoSlideInterval = setInterval(autoSlide, 3000);
-            }
-
-            document.getElementById('next').addEventListener('click', () => {
-                clearInterval(autoSlideInterval);
-                index = (index + 1) % images.length;
-                updateCarousel();
-                startAutoSlide();
             });
-
-            document.getElementById('prev').addEventListener('click', () => {
-                clearInterval(autoSlideInterval);
-                index = (index - 1 + images.length) % images.length;
+    
+            document.getElementById("prev").addEventListener("click", () => {
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
                 updateCarousel();
-                startAutoSlide();
             });
-            
+    
+            // Initial setup
             updateCarousel();
-            startAutoSlide();
         });
     </script>
+    
 </body>
 </html>
