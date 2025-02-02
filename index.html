@@ -176,45 +176,48 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const carouselContainer = document.getElementById("carousel-container");
-            for (let i = 1; i <= 23; i++) {
+            const totalImages = 23; // Nombre total d'images
+            const imageWidth = 300; // Largeur de l'image active
+            const gap = 10; // Espace entre les images
+            let index = 0;
+            let autoSlideInterval;
+    
+            // Générer les images
+            for (let i = 1; i <= totalImages; i++) {
                 let img = document.createElement("img");
                 img.src = `Images/photo${i}.jpg`;
                 img.alt = `Photo ${i}`;
+                img.style.transition = "transform 0.5s, opacity 0.5s";
                 carouselContainer.appendChild(img);
             }
     
             const images = document.querySelectorAll('.carousel-images img');
-            let index = 0;
-            let autoSlideInterval;
     
             function updateCarousel() {
                 images.forEach((img, i) => {
-                    img.classList.remove('active');
-                    const offset = (i - index + images.length) % images.length;
-                    
+                    const offset = (i - index + totalImages) % totalImages; // Position relative
                     if (offset === 0) {
-                        // Image centrale (active)
-                        img.classList.add('active');
-                        img.style.transform = 'scale(1.2)';
-                        img.style.opacity = '1';
-                    } else if (offset === 1 || offset === images.length - 1) {
-                        // Images à gauche et à droite
-                        img.style.transform = 'scale(0.9)';
-                        img.style.opacity = '0.7';
+                        // Image active (centrale)
+                        img.style.transform = "scale(1.2)";
+                        img.style.opacity = "1";
+                    } else if (offset === 1 || offset === totalImages - 1) {
+                        // Images adjacentes
+                        img.style.transform = "scale(0.9)";
+                        img.style.opacity = "0.7";
                     } else {
-                        // Images restantes (masquées)
-                        img.style.transform = 'scale(0.7)';
-                        img.style.opacity = '0.5';
+                        // Autres images (réduites)
+                        img.style.transform = "scale(0.7)";
+                        img.style.opacity = "0.5";
                     }
                 });
     
-                // Translation pour centrer l'image active
-                const offsetX = -(index * 210) + 300; // Ajuste la position
+                // Centrer l'image active
+                const offsetX = -(index * (imageWidth + gap)) + (window.innerWidth - imageWidth) / 2;
                 carouselContainer.style.transform = `translateX(${offsetX}px)`;
             }
     
             function autoSlide() {
-                index = (index + 1) % images.length;
+                index = (index + 1) % totalImages;
                 updateCarousel();
             }
     
@@ -222,16 +225,17 @@
                 autoSlideInterval = setInterval(autoSlide, 3000);
             }
     
-            document.getElementById('next').addEventListener('click', () => {
+            // Boutons précédent/suivant
+            document.getElementById("next").addEventListener("click", () => {
                 clearInterval(autoSlideInterval);
-                index = (index + 1) % images.length;
+                index = (index + 1) % totalImages;
                 updateCarousel();
                 startAutoSlide();
             });
     
-            document.getElementById('prev').addEventListener('click', () => {
+            document.getElementById("prev").addEventListener("click", () => {
                 clearInterval(autoSlideInterval);
-                index = (index - 1 + images.length) % images.length;
+                index = (index - 1 + totalImages) % totalImages;
                 updateCarousel();
                 startAutoSlide();
             });
