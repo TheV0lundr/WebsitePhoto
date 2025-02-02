@@ -149,7 +149,7 @@
             let autoSlideInterval;
 
             function updateCarousel() {
-                images.style.transform = `translateX(-${index * 700}px)`;
+                images.style.transform = `translateX(-${index * 500}px)`;
             }
 
             function autoSlide() {
@@ -158,7 +158,7 @@
             }
 
             function startAutoSlide() {
-                autoSlideInterval = setInterval(autoSlide, 3000);
+                autoSlideInterval = setInterval(autoSlide, 2500);
             }
 
             document.getElementById('next').addEventListener('click', () => {
