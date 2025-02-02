@@ -177,17 +177,17 @@
         document.addEventListener("DOMContentLoaded", function () {
             const carouselContainer = document.getElementById("carousel-container");
             const totalImages = 23; // Nombre total d'images
-            const imageWidth = 300; // Largeur de l'image active
+            const imageWidth = 200; // Largeur de l'image normale
+            const activeImageWidth = 300; // Largeur de l'image active
             const gap = 10; // Espace entre les images
             let index = 0;
             let autoSlideInterval;
     
-            // Générer les images
+            // Générer les images dans le carrousel
             for (let i = 1; i <= totalImages; i++) {
-                let img = document.createElement("img");
+                const img = document.createElement("img");
                 img.src = `Images/photo${i}.jpg`;
                 img.alt = `Photo ${i}`;
-                img.style.transition = "transform 0.5s, opacity 0.5s";
                 carouselContainer.appendChild(img);
             }
     
@@ -195,24 +195,23 @@
     
             function updateCarousel() {
                 images.forEach((img, i) => {
-                    const offset = (i - index + totalImages) % totalImages; // Position relative
-                    if (offset === 0) {
-                        // Image active (centrale)
+                    if (i === index) {
+                        img.style.width = `${activeImageWidth}px`;
                         img.style.transform = "scale(1.2)";
                         img.style.opacity = "1";
-                    } else if (offset === 1 || offset === totalImages - 1) {
-                        // Images adjacentes
+                    } else if (i === (index - 1 + totalImages) % totalImages || i === (index + 1) % totalImages) {
+                        img.style.width = `${imageWidth}px`;
                         img.style.transform = "scale(0.9)";
                         img.style.opacity = "0.7";
                     } else {
-                        // Autres images (réduites)
+                        img.style.width = `${imageWidth}px`;
                         img.style.transform = "scale(0.7)";
                         img.style.opacity = "0.5";
                     }
                 });
     
-                // Centrer l'image active
-                const offsetX = -(index * (imageWidth + gap)) + (window.innerWidth - imageWidth) / 2;
+                // Centrer le conteneur sur l'image active
+                const offsetX = -(index * (imageWidth + gap)) + (carouselContainer.offsetWidth - activeImageWidth) / 2;
                 carouselContainer.style.transform = `translateX(${offsetX}px)`;
             }
     
@@ -225,7 +224,6 @@
                 autoSlideInterval = setInterval(autoSlide, 3000);
             }
     
-            // Boutons précédent/suivant
             document.getElementById("next").addEventListener("click", () => {
                 clearInterval(autoSlideInterval);
                 index = (index + 1) % totalImages;
@@ -243,6 +241,6 @@
             updateCarousel();
             startAutoSlide();
         });
-    </script>    
-</body>
+    </script>
+    </body>
 </html>
