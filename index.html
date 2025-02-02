@@ -142,7 +142,7 @@
     document.addEventListener("DOMContentLoaded", function () {
       const carouselContainer = document.getElementById("carousel-container");
       const originalCount = 23;       // Nombre d'images originales
-      const clonesCount = 5;          // Nombre d'images à cloner de chaque côté
+      const clonesCount = 4;          // Nombre d'images à cloner de chaque côté
       const imageWidth = 300;         // Largeur d'une image
       const gap = 10;                 // Espace entre les images
 
@@ -183,6 +183,22 @@
         carouselContainer.style.transform = `translateX(${offset}px)`;
       }
 
+      // Fonction de défilement automatique
+      function autoScroll() {
+        currentIndex++;
+        updateCarousel();
+        // Lorsque l'on atteint les clones à la fin, on réinitialise (après la transition) vers le premier réel
+        if (currentIndex === fullImages.length - clonesCount) {
+          setTimeout(() => {
+            currentIndex = clonesCount;
+            updateCarousel(false); // Mise à jour instantanée sans animation
+          }, 500);
+        }
+      }
+
+      // Lancer le défilement automatique toutes les 3 secondes
+      let autoScrollInterval = setInterval(autoScroll, 3000);
+
       // Événement pour le clic sur le bouton "suivant"
       document.getElementById("next").addEventListener("click", () => {
         currentIndex++;
@@ -194,24 +210,11 @@
             updateCarousel(false); // Mise à jour instantanée sans animation
           }, 500);
         }
+        // Réinitialiser le défilement automatique lorsque l'utilisateur interagit
+        clearInterval(autoScrollInterval);
+        autoScrollInterval = setInterval(autoScroll, 3000);
       });
 
       // Événement pour le clic sur le bouton "précédent"
       document.getElementById("prev").addEventListener("click", () => {
-        currentIndex--;
-        updateCarousel();
-        // Si l'on atteint les clones du début, on réinitialise vers la fin réelle
-        if (currentIndex === clonesCount - 1) {
-          setTimeout(() => {
-            currentIndex = fullImages.length - clonesCount - 1;
-            updateCarousel(false);
-          }, 500);
-        }
-      });
-
-      // Position initiale sans animation
-      updateCarousel(false);
-    });
-  </script>
-</body>
-</html>
+        currentIndex--
