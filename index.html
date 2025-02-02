@@ -153,6 +153,7 @@
         document.addEventListener("DOMContentLoaded", function () {
             const carouselContainer = document.getElementById("carousel-container");
             const imageCount = 23;
+            const imagesToClone = 4; // Le nombre d'images à cloner pour créer l'effet fluide
 
             // Populate the carousel with images
             for (let i = 1; i <= imageCount; i++) {
@@ -162,48 +163,48 @@
                 carouselContainer.appendChild(img);
             }
 
-            // Clone the first and last image to create the infinite loop effect
             const images = document.querySelectorAll(".carousel-images img");
-            const firstImage = images[0];
-            const lastImage = images[images.length - 1];
 
-            // Clone the images
-            const firstClone = firstImage.cloneNode(true);
-            const lastClone = lastImage.cloneNode(true);
+            // Cloner les 4 premières images pour l'effet fluide
+            const clonedImages = [];
+            for (let i = 0; i < imagesToClone; i++) {
+                const clone = images[i].cloneNode(true);
+                clonedImages.push(clone);
+            }
 
-            // Append and prepend the clones
-            carouselContainer.appendChild(firstClone);
-            carouselContainer.insertBefore(lastClone, images[0]);
+            // Ajouter les clones à la fin du carrousel
+            clonedImages.forEach(clone => {
+                carouselContainer.appendChild(clone);
+            });
 
-            let currentIndex = 1; // Start at the real first image
+            let currentIndex = imagesToClone; // L'index commence après les clones
 
             function updateCarousel() {
-                // Move to the appropriate index
-                const offset = -currentIndex * (300 + 10); // Width of the image + gap
+                const offset = -currentIndex * (300 + 10); // Largeur de l'image + l'espace
                 carouselContainer.style.transform = `translateX(${offset}px)`;
 
-                // Looping logic
+                // Logique de réinitialisation pour un carrousel infini
                 if (currentIndex === images.length) {
                     setTimeout(() => {
-                        carouselContainer.style.transition = "none"; // Disable transition for reset
-                        currentIndex = 1;
+                        carouselContainer.style.transition = "none"; // Désactiver la transition pendant la réinitialisation
+                        currentIndex = imagesToClone; // Retourner au premier "vrai" élément
                         carouselContainer.style.transform = `translateX(-${currentIndex * (300 + 10)}px)`;
-                    }, 500); // Wait for the transition to complete
+                    }, 500); // Attendre la fin de la transition
 
                     setTimeout(() => {
-                        carouselContainer.style.transition = "transform 0.5s ease-in-out"; // Re-enable transition
+                        carouselContainer.style.transition = "transform 0.5s ease-in-out"; // Réactiver la transition
                     }, 600);
                 }
 
                 if (currentIndex === 0) {
                     setTimeout(() => {
-                        carouselContainer.style.transition = "none"; // Disable transition for reset
-                        currentIndex = images.length - 2;
+                        carouselContainer.style.transition = "none";
+                        currentIndex = images.length - imagesToClone;
                         carouselContainer.style.transform = `translateX(-${currentIndex * (300 + 10)}px)`;
                     }, 500);
 
                     setTimeout(() => {
-                        carouselContainer.style.transition = "transform 0.5s ease-in-out"; // Re-enable transition
+                        carouselContainer.style.transition = "transform 0.5s ease-in-out";
                     }, 600);
                 }
             }
