@@ -45,7 +45,7 @@
 
         .carousel {
             position: relative;
-            max-width: 500px;
+            max-width: 100%; /* Utilise toute la largeur disponible */
             margin: 50px auto;
             overflow: hidden;
             border-radius: 12px;
@@ -54,20 +54,19 @@
 
         .carousel-images {
             display: flex;
-            justify-content: center;
-            align-items: center;
             gap: 10px;
             transition: transform 0.5s ease-in-out;
         }
 
         .carousel-images img {
             width: 300px;
+            height: auto;
             transition: transform 0.5s;
             opacity: 0.7;
+            object-fit: cover; /* Pour éviter la déformation des images */
         }
 
         .carousel-images img.active {
-            width: 300px;
             transform: scale(1.2);
             opacity: 1;
         }
