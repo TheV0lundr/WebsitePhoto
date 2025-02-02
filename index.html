@@ -153,71 +153,54 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const carouselContainer = document.getElementById("carousel-container");
-            const totalImages = 23; // Nombre total d'images
-            const imageWidth = 200; // Largeur de l'image normale
-            const activeImageWidth = 300; // Largeur de l'image active
-            const gap = 10; // Espace entre les images
-            let index = 0;
-            let autoSlideInterval;
-    
-            // Générer les images dans le carrousel
-            for (let i = 1; i <= totalImages; i++) {
-                const img = document.createElement("img");
-                img.src = `Images/photo${i}.JPG`;
+            for (let i = 1; i <= 23; i++) {
+                let img = document.createElement("img");
+                img.src = `Images/photo${i}.jpg`;
                 img.alt = `Photo ${i}`;
+                if (i === 1) img.classList.add("active");
                 carouselContainer.appendChild(img);
             }
-    
+
             const images = document.querySelectorAll('.carousel-images img');
-    
+            let index = 0;
+            let autoSlideInterval;
+
             function updateCarousel() {
                 images.forEach((img, i) => {
-                    if (i === index) {
-                        img.style.width = `${activeImageWidth}px`;
-                        img.style.transform = "scale(1.2)";
-                        img.style.opacity = "1";
-                    } else if (i === (index - 1 + totalImages) % totalImages || i === (index + 1) % totalImages) {
-                        img.style.width = `${imageWidth}px`;
-                        img.style.transform = "scale(0.9)";
-                        img.style.opacity = "0.7";
-                    } else {
-                        img.style.width = `${imageWidth}px`;
-                        img.style.transform = "scale(0.7)";
-                        img.style.opacity = "0.5";
-                    }
+                    img.classList.remove('active');
+                    img.style.width = i === index ? '300px' : '200px';
+                    img.style.opacity = i === index ? '1' : '0.7';
                 });
-    
-                // Centrer le conteneur sur l'image active
-                const offsetX = -(index * (imageWidth + gap)) + (carouselContainer.offsetWidth - activeImageWidth) / 2;
-                carouselContainer.style.transform = `translateX(${offsetX}px)`;
+                images[index].classList.add('active');
+                images[index].scrollIntoView({ behavior: 'smooth', inline: 'center' });
             }
-    
+
             function autoSlide() {
-                index = (index + 1) % totalImages;
+                index = (index + 1) % images.length;
                 updateCarousel();
             }
-    
+
             function startAutoSlide() {
                 autoSlideInterval = setInterval(autoSlide, 3000);
             }
-    
-            document.getElementById("next").addEventListener("click", () => {
+
+            document.getElementById('next').addEventListener('click', () => {
                 clearInterval(autoSlideInterval);
-                index = (index + 1) % totalImages;
+                index = (index + 1) % images.length;
                 updateCarousel();
                 startAutoSlide();
             });
-    
-            document.getElementById("prev").addEventListener("click", () => {
+
+            document.getElementById('prev').addEventListener('click', () => {
                 clearInterval(autoSlideInterval);
-                index = (index - 1 + totalImages) % totalImages;
+                index = (index - 1 + images.length) % images.length;
                 updateCarousel();
                 startAutoSlide();
             });
-    
+            
             updateCarousel();
             startAutoSlide();
         });
     </script>
-    </body>
+</body>
 </html>
