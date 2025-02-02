@@ -157,7 +157,7 @@
             // Populate the carousel with images
             for (let i = 1; i <= imageCount; i++) {
                 let img = document.createElement("img");
-                img.src = `Images/DSC${String(i).padStart(2, '0')}.JPG`; // Chemin modifié
+                img.src = `Images/DSC${String(i).padStart(3, '0')}.JPG`; // Chemin modifié
                 img.alt = `Photo ${i}`;
                 carouselContainer.appendChild(img);
             }
