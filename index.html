@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TF.SHOTZ</title>
+    <title>TF.SHOTZ - Photographie</title>
     <style>
         body {
             margin: 0;
@@ -55,13 +55,12 @@
         .carousel-images {
             display: flex;
             gap: 10px;
-            transition: transform 0.5s ease-in-out;
+            animation: slide 30s linear infinite; /* Animation de défilement fluide */
         }
 
         .carousel-images img {
             width: 300px;
             height: auto;
-            transition: transform 0.5s;
             opacity: 0.7;
             object-fit: cover; /* Pour éviter la déformation des images */
         }
@@ -88,6 +87,16 @@
             cursor: pointer;
             font-size: 1.5em;
             border-radius: 50%;
+        }
+
+        /* Animation du défilement fluide */
+        @keyframes slide {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-calc(100% / 4)); /* Défilement sur 4 images */
+            }
         }
 
         .contact, .pricing {
@@ -117,10 +126,6 @@
 
     <div id="galerie" class="carousel">
         <div class="carousel-images" id="carousel-container">
-        </div>
-        <div class="carousel-buttons">
-            <button id="prev">❮</button>
-            <button id="next">❯</button>
         </div>
     </div>
 
@@ -163,52 +168,16 @@
             }
 
             const images = document.querySelectorAll(".carousel-images img");
-            let currentIndex = 0;
 
-            // Clone the first 4 images and add them to the end of the carousel
+            // Cloner les images pour une boucle infinie
             for (let i = 0; i < 4; i++) {
                 let clone = images[i].cloneNode(true);
                 carouselContainer.appendChild(clone);
             }
 
-            // Update the carousel position
-            function updateCarousel() {
-                images.forEach((img) => {
-                    img.classList.remove("active");
-                });
-
-                images[currentIndex].classList.add("active");
-
-                // Move the carousel container
-                const offset = -currentIndex * (300 + 10); // Largeur image + espacement
-                carouselContainer.style.transition = "none"; // Pas de transition pour le défilement instantané
-                carouselContainer.style.transform = `translateX(${offset}px)`;
-            }
-
-            // Auto-scroll
-            function autoScroll() {
-                setInterval(() => {
-                    currentIndex = (currentIndex + 1) % images.length; // Défilement continu
-                    updateCarousel();
-                }, 3000); // Change toutes les 3 secondes
-            }
-
-            // Lancer l'auto-scroll dès le début
-            autoScroll();
-
-            // Boutons de navigation
-            document.getElementById("next").addEventListener("click", () => {
-                currentIndex = (currentIndex + 1) % images.length;
-                updateCarousel();
-            });
-
-            document.getElementById("prev").addEventListener("click", () => {
-                currentIndex = (currentIndex - 1 + images.length) % images.length;
-                updateCarousel();
-            });
-
             // Initial setup
-            updateCarousel();
+            const imageWidth = 300 + 10; // Largeur image + espacement
+            carouselContainer.style.width = `${imageWidth * images.length}px`;
         });
     </script>
 </body>
