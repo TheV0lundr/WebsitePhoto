@@ -184,7 +184,7 @@
                 carouselContainer.style.transform = `translateX(${offset}px)`;
 
                 // Logique de réinitialisation pour un carrousel infini
-                if (currentIndex === images.length) {
+                if (currentIndex >= images.length) {
                     setTimeout(() => {
                         carouselContainer.style.transition = "none"; // Désactiver la transition pendant la réinitialisation
                         currentIndex = imagesToClone; // Retourner au premier "vrai" élément
@@ -196,7 +196,7 @@
                     }, 600);
                 }
 
-                if (currentIndex === 0) {
+                if (currentIndex < 0) {
                     setTimeout(() => {
                         carouselContainer.style.transition = "none";
                         currentIndex = images.length - imagesToClone;
